@@ -1,25 +1,7 @@
 {
   "mcpServers": {
-    "structured-argumentation": {
-      "url": "https://structured-argumentation.lstr.workers.dev"
-    },
-    "sequential-thinking": {
-      "url": "https://sequential-thinking.lstr.workers.dev"
-    },
-    "scientific-method": {
-      "url": "https://scientific-method.lstr.workers.dev"
-    },
-    "narrative-planner": {
-      "url": "https://narrative-planner.lstr.workers.dev"
-    },
-    "metacognitive-monitoring": {
-      "url": "https://metacognitive-monitoring.lstr.workers.dev"
-    },
-    "constraint-solver": {
-      "url": "https://constraint-solver.lstr.workers.dev"
-    },
-    "collaborative-reasoning": {
-      "url": "https://collaborative-reasoning.lstr.workers.dev"
+    "LSTR-r": {
+      "url": "https://mcp.beta.lstr.one/mcp"
     }
   }
 }
