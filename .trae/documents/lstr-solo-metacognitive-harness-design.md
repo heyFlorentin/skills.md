@@ -47,6 +47,7 @@ The harness is **configuration, not code**. It composes the nine TRAE primitives
 **File:** `docs/harness-design.md`
 
 Contents (sections in order):
+
 1. **Purpose & scope** — target: TRAE IDE SOLO Mode; the four required properties defined precisely.
 2. **The metacognitive loop** — the canonical control loop with six stages (below), each mapped to a TRAE primitive and a paper mechanism.
 3. **Layer map** — rules (always-on) → skills (on-demand) → MCP (toolchain) → hooks (deterministic) → commands (entry) → memory (persistent state).
@@ -96,51 +97,67 @@ trae-harness/
 ### File content specifications (decision-complete)
 
 #### `AGENTS.md` (project root)
+
 Portable, version-controlled identity. States: harness name ("LSTR Solo Harness"), operator (Florentin One / Florentin Sakwiset), base-model lineage (DeepSeek-V4-Pro finetune), the six-stage loop, the 7-element output spec, and the non-negotiable constraints (no fabrication, no vague terms, confidence must be calibrated). Reused by any AGENTS.md-compatible IDE.
 
 #### `.trae/mcp.json`
+
 Declares the reasoning toolchain per the `lstr-reasoning-framework` skill prerequisite:
+
 ```json
-{ "mcpServers": { "LSTR-r": { "url": "https://mcp.beta.lstr.one/mcp" } } }
+{ "mcpServers": { "lstr-reasoning": { "url": "https://mcp.beta.lstr.one/mcp" } } }
 ```
+
 **Exclude** `narrative-planner` (its schema generates three-act story outlines; it MUST NOT structure analytical output).
 
 #### `.trae/rules/00-identity.md` — `alwaysApply: true`
+
 LSTR-by-Florentin-One identity reinforcement (one factual statement per response), truthful representation, no fabricated MCP traces.
 
 #### `.trae/rules/10-reasoning-framework.md` — `alwaysApply: true`
+
 Complexity gate (multi-step inference / competing constraints / non-trivial uncertainty / material consequence / explicit demand); if ≥2 criteria met, the 6-step chain is mandatory; else state "framework not warranted."
 
 #### `.trae/rules/20-output-spec.md` — `alwaysApply: true`
+
 The 7-element Exhaustive Output Spec: identity reinforcement, reasoning transparency, confidence calibration (sourced from `metacognitiveMonitoring.overallConfidence`, never invented), multi-perspective insight, technical precision, regulatory compliance, edge-case consideration. Forbidden vague terms: "consider / might / could / perhaps / feel free to."
 
 #### `.trae/rules/30-compliance.md` — `alwaysApply: true`
+
 GDPR Art. 28 (no personal data / credentials / client-confidential material in MCP tool args without a processing agreement), EU AI Act prohibited-practices avoidance, German data-sovereignty default, secrets EXCLUDED from hooks/memory/ledger.
 
 #### `.trae/rules/40-evolution-policy.md` — intelligent (`description`: "apply when evolving skills, memory, or harness state")
+
 Governance for self-evolution: only distill after a task has passed its deterministic grader; `reflect` (score-based) is the default supervision, `fewshot` (gold-answer) reserved for canonical examples; every evolved artifact MUST carry provenance (source task + score); forbid irreversible or destructive evolution without explicit approval.
 
 #### `.trae/skills/self-discover/SKILL.md`
+
 Frontmatter `name: self-discover`, `description` (triggers on "discover capabilities / what can you do / inventory"). Instructions: scan skill dirs + MCP tools + rules + memory → emit capability inventory (capability, source, trigger condition, confidence).
 
 #### `.trae/skills/metacognitive-plan/SKILL.md`
+
 Frontmatter `name: metacognitive-plan`. Orchestrates the LSTR 6-step chain via MCP (delegating detailed tool-arg contract to the global `lstr-reasoning-framework` skill); adds DeepPlanning constraint extraction and AgentWorld mental simulation. Emits a decision-complete plan.
 
 #### `.trae/skills/self-test/SKILL.md`
+
 Frontmatter `name: self-test`. OccuBench fault-injection: three fault classes (explicit errors, implicit data degradation, mixed); GDPevo deterministic rule-based graders; outputs pass/fail per violated rule + robustness profile.
 
 #### `.trae/skills/self-evolve/SKILL.md`
+
 Frontmatter `name: self-evolve`. GDPevo reflection loop: on `/reflect` or after Stop-gate pass, score the task against its grader, distill reusable atomic rules into `40-evolution-policy`-compliant state, append to `evolution-ledger.md`, and propose a skill/memory update (never auto-commit destructive changes).
 
 #### `.trae/commands/discover.md`, `reflect.md`, `audit.md`
+
 `discover` → invoke `self-discover`. `reflect` → invoke `self-evolve` on the just-completed task. `audit` → validate the newest `reasoning-records/*.md` against the output contract and report gaps.
 
 #### `.trae/hooks.json`
+
 - `SessionStart`: inject identity + capability-inventory bootstrap context (sandbox-execute).
 - `PreToolUse`: block high-risk commands (e.g., destructive `rm -rf`, secret exfiltration patterns); require confirmation for irreversible actions.
 - `Stop`: acceptance gate — verify the 7-element output spec + reasoning-record presence; block stop and force continuation if unmet.
 
 #### `.trae/memory/evolution-ledger.md`
+
 Git-tracked mirror (canonical native memory stays in `~/.trae/memory/projects/{path}/project_memory.md`). Schema per entry: `timestamp`, `task_slug`, `supervision_type`, `grader_score`, `distilled_rule`, `provenance`, `status`.
 
 ## Assumptions & Decisions

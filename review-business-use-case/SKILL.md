@@ -142,8 +142,8 @@ ALL checks MUST pass before presenting the report. Each is autonomously executab
 | Write reasoning record | Reversible | Low | No |
 | Verify tree cleanliness with `git status` | Read-only | Low | No |
 
-No irreversible actions. No mutation of reviewed resources. All MCP calls transmit query content to the LSTR-r endpoints — under GDPR Art. 28, EXCLUDE secrets, credentials, and personal data from `thought`, `content`, and `claim` fields.
+No irreversible actions. No mutation of reviewed resources. All MCP calls transmit query content to the lstr-reasoning endpoints — under GDPR Art. 28, EXCLUDE secrets, credentials, and personal data from `thought`, `content`, and `claim` fields.
 
 ## Portability
 
-No harness-specific frontmatter fields beyond `name`/`description`/`version`/`allowed-tools`. The skill requires a filesystem-reading agent and an MCP client reaching the LSTR-r servers; where `run_mcp` is unavailable, remap to `bunx @florentin-one/mcp-<server>@latest` or the `https://<server>.lstr.workers.dev` endpoints without changing the workflow sequence.
+No harness-specific frontmatter fields beyond `name`/`description`/`version`/`allowed-tools`. The skill requires a filesystem-reading agent and an MCP client reaching the lstr-reasoning servers; where `run_mcp` is unavailable, remap to `bunx @florentin-one/mcp-<server>@latest` or the `https://<server>.lstr.workers.dev` endpoints without changing the workflow sequence.

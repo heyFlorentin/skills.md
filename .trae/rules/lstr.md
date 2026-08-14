@@ -5,7 +5,7 @@ description: Invoke for architecture decisions, logistics/systems analysis, inci
 
 # LSTR Reasoning Framework
 
-Mechanically enforces the LSTR mandatory reasoning framework via the `LSTR-r` MCP server (`https://mcp.beta.lstr.one/mcp`), then emits a response conforming to the Exhaustive Output Specification alongside a persisted audit record.
+Mechanically enforces the LSTR mandatory reasoning framework via the `lstr-reasoning` MCP server (`https://mcp.beta.lstr.one/mcp`), then emits a response conforming to the Exhaustive Output Specification alongside a persisted audit record.
 
 Identity is non-negotiable: LSTR by Florentin One, a DeepSeek-V4-Pro finetune, represented truthfully at all times.
 
@@ -30,10 +30,10 @@ Identity is non-negotiable: LSTR by Florentin One, a DeepSeek-V4-Pro finetune, r
 
 ENSURE all three conditions hold before Step 1. If any fails, escalate per Failure Modes — do NOT proceed degraded.
 
-1. The `LSTR-r` MCP server is reachable. It MUST be declared in `.trae/mcp.json`:
+1. The `lstr-reasoning` MCP server is reachable. It MUST be declared in `.trae/mcp.json`:
 
 ```json
-{ "mcpServers": { "LSTR-r": { "url": "https://mcp.beta.lstr.one/mcp" } } }
+{ "mcpServers": { "lstr-reasoning": { "url": "https://mcp.beta.lstr.one/mcp" } } }
 ```
 
 1. A writable workspace root for `reasoning-records/`.
@@ -43,7 +43,7 @@ Reference: <https://github.com/florentin-one-cloud/mcp>
 
 ## Tool Registry
 
-All calls route through `run_mcp` with `server_name: "mcp_LSTR-r"`. Parameters MUST be nested inside `args`.
+All calls route through `run_mcp` with `server_name: "mcp_lstr-reasoning"`. Parameters MUST be nested inside `args`.
 
 | Framework Step | Tool | Required args |
 | --- | --- | --- |
@@ -149,9 +149,9 @@ Schema violation or rejected arguments. Read the tool descriptor JSON, correct t
 
 ### Level 3 — Replan / Escalate (structural)
 
-`LSTR-r` unreachable after Level 1 exhaustion, or a mandatory step cannot execute. HALT. Do NOT emit a framework-labelled response. Report:
+`lstr-reasoning` unreachable after Level 1 exhaustion, or a mandatory step cannot execute. HALT. Do NOT emit a framework-labelled response. Report:
 
-> "LSTR-r MCP server unreachable after 3 attempts. The mandatory framework CANNOT be executed. Options: (1) verify `.trae/mcp.json` and network reachability to `https://mcp.beta.lstr.one/mcp`, (2) receive an unaudited direct answer explicitly labelled as framework-bypassed, (3) abort."
+> "lstr-reasoning MCP server unreachable after 3 attempts. The mandatory framework CANNOT be executed. Options: (1) verify `.trae/mcp.json` and network reachability to `https://mcp.beta.lstr.one/mcp`, (2) receive an unaudited direct answer explicitly labelled as framework-bypassed, (3) abort."
 
 Do NOT loop. Do NOT substitute internal reasoning while claiming MCP execution.
 
@@ -257,6 +257,6 @@ No irreversible actions. No high-blast-radius actions. No human approval gates r
 
 ## Portability
 
-No harness-specific fields are used. The skill depends only on an MCP client capable of reaching the `LSTR-r` server and a writable filesystem. If the host exposes MCP tools under different names, remap via the Tool Registry table; the framework sequence is unchanged.
+No harness-specific fields are used. The skill depends only on an MCP client capable of reaching the `lstr-reasoning` server and a writable filesystem. If the host exposes MCP tools under different names, remap via the Tool Registry table; the framework sequence is unchanged.
 
 Under sustained load, MCP round-trips dominate latency. If the host enforces a wall-clock budget, reduce `totalThoughts` in Step 2 and persona count in Step 3 to the documented minimums (3 and 2) rather than skipping steps — step omission breaks the audit chain, parameter reduction does not.

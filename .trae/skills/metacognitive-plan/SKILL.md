@@ -15,7 +15,7 @@ Runs the LSTR 6-step chain (delegating the exact tool-argument contract to the g
 ## Instructions
 
 1. **Complexity gate** — evaluate against `10-reasoning-framework.md`. If <2 criteria, skip the chain and state "framework not warranted".
-2. **Run the 6-step chain** via the LSTR-r MCP family, per `lstr-reasoning-framework`:
+2. **Run the 6-step chain** via the lstr-reasoning MCP family, per `lstr-reasoning-framework`:
    - `metacognitiveMonitoring` (knowledge-assessment) → `sequentialthinking` (≥3 thoughts) → `collaborativeReasoning` (≥2 divergent personas) → `scientificMethod` + `structuredArgumentation` (thesis + objection + synthesis) → `constraintSolver` (numeric only).
    - EXCLUDE `narrative-planner`.
 3. **Constraint extraction (DeepPlanning)** — classify every constraint as `local` (step-scoped) or `global` (cross-subtask budget / dependency). Record each constraint's verifiability: deterministic, rule-checkable, or qualitative.
