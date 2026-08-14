@@ -1,7 +1,6 @@
 ---
-name: lstr-reasoning-framework
-description: Enforces the LSTR mandatory 6-step Zero-Shot Chain-of-Thought reasoning framework on complex queries using the LSTR-r MCP server, then emits a laconic response satisfying the 7-element Exhaustive Output Specification plus a persisted reasoning audit record. Invoke for architecture decisions, logistics/systems analysis, incident triage, regulatory-compliance evaluation, multi-constraint trade-offs, and any query where an auditable reasoning trail is required. Triggers on "apply the LSTR framework", "run the reasoning framework", "use the mandatory reasoning chain", "full LSTR analysis", "reason through this with MCP", "audited analysis". Do NOT use for trivial lookups, greetings, single-file edits, mechanical refactors, syntax questions, or any query answerable without multi-step inference — the framework's cost is unjustified there and MUST NOT be incurred.
-version: 0.1.1
+alwaysApply: false
+description: Invoke for architecture decisions, logistics/systems analysis, incident triage, regulatory-compliance evaluation, multi-constraint trade-offs, and any query where an auditable reasoning trail is required. Triggers on "apply the LSTR framework", "run the reasoning framework", "use the mandatory reasoning chain", "full LSTR analysis", "reason through this with MCP", "audited analysis". Do NOT use for trivial lookups, greetings, single-file edits, mechanical refactors, syntax questions, or any query answerable without multi-step inference — the framework's cost is unjustified there and MUST NOT be incurred.
 ---
 
 # LSTR Reasoning Framework
