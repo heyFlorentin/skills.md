@@ -1,7 +1,7 @@
 ---
 name: research-to-feature
-description: Produces a single RICE-scored feature recommendation backed by a NotebookLM meta-study and a business-use-case review, ready for a developer to pick up and implement. Chains self-discover → notebooklm-meta-study → review-business-use-case → RICE scoring into one pipeline. Trigger phrases: "research a feature for", "evidence-backed feature proposal", "RICE-scored feature from research", "turn research into a feature spec", "meta-study to feature", "research-to-feature pipeline". Do NOT use for trivial lookups, single-skill tasks, feature ideas without research backing, or any query where the user already has a fully specified feature — this skill generates evidence from scratch.
-version: 0.1.0
+description: Produces a single RICE-scored feature recommendation backed by a NotebookLM meta-study and a business use-case review, ready for a developer to pick up and implement. Chains self-discover → notebooklm-meta-study → review-business-use-case → RICE scoring into one pipeline. The trigger phrases are "research a feature for", "evidence-backed feature proposal", "RICE-scored feature from research", "turn research into a feature spec", "meta-study to feature", and "research-to-feature pipeline". Do NOT use for trivial lookups, single-skill tasks, feature ideas without research backing, or any query where the user already has a fully specified feature — this skill generates evidence from scratch.
+version: 0.1.1
 allowed-tools: Read, Write, LS, Glob, Grep, WebSearch, WebFetch, run_mcp, Skill, Task
 ---
 
